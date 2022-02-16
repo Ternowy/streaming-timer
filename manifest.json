@@ -3,12 +3,9 @@
   "description": "Plugin pauses netflix episode in the middle, and suggests stop timer, in order to prevent the desire to watch next episode",
   "version": "1.0",
   "manifest_version": 3,
-  "background": {
-    "service_worker": "background.js"
-  },
   "permissions": ["storage", "activeTab", "scripting"],
   "action": {
-    "default_popup": "popup.html",
+    "default_popup": "dist/popup.html",
     "default_icon": {
       "16": "/images/get_started16.png",
       "32": "/images/get_started32.png",
@@ -25,8 +22,8 @@
   "content_scripts": [
     {
       "matches": ["https://www.netflix.com/watch/*", "https://netflix.com/watch/*"],
-      "css": ["css/drivers/netflix.css"],
-      "js": ["bridges/netflix-bridge.js", "app.js"],
+      "css": ["css/netflix.css"],
+      "js": ["app.js"],
       "run_at": "document_idle",
       "all_frames": true
     }
