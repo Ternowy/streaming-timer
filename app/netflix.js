@@ -1,6 +1,8 @@
-window.VideoBridge = class {
-  constructor (player) {
-    this.player = player
+import App from './app.js'
+
+class Netflix extends App {
+  constructor () {
+    super()
   }
 
   isPlaying () {
@@ -21,3 +23,5 @@ window.VideoBridge = class {
     return ((currentTime + 5) > middle) && ((currentTime - 5) < middle)
   }
 }
+
+new Netflix()

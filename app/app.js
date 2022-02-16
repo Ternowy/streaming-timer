@@ -1,54 +1,62 @@
-let watched = 0
+export default class App {
+  constructor () {
+    this.watched = 0
+    this.hadBeenStoped = false
 
-let hadBeenStoped = false
+    document.body.insertAdjacentHTML(
+      'afterend',
+      `<dialog id="stop-netflix-overlay">This is a dialog.<br><button>Close</button></dialog>`
+    )
 
-document.body.insertAdjacentHTML('afterend', `<dialog id="stop-netflix-overlay">This is a dialog.<br><button>Close</button></dialog>`)
+    this.initializeNodeObserver()
+  }
 
-const showModal = (bridge) => {
-  const dialog = document.querySelector('#stop-netflix-overlay')
-
-  dialog.querySelector('button').addEventListener('click', function () {
-    dialog.close()
-    bridge.play()
-  })
-
-  dialog.showModal()
-}
-
-const mountApp = (video) => {
-  const bridge = new window.VideoBridge(video)
-
-  setInterval(() => {
-    if (bridge.isPlaying()) {
-      watched++
-      console.log('watched triggered')
-      if (bridge.isInTheMiddle() && watched > 1 && !hadBeenStoped) {
-        showModal(bridge)
-        bridge.stop()
-        hadBeenStoped = true
-      }
-    }
-    //clearInterval(repeater)
-  }, 1000)
-}
-
-const observer = new MutationObserver(
-  mutations => mutations.forEach(
-    ({addedNodes}) => addedNodes.forEach(
-      node => {
+  initializeNodeObserver () {
+    const observer = new MutationObserver(mutations => mutations.forEach(
+      ({addedNodes}) => addedNodes.forEach(node => {
         if (node.querySelector('video')) {
-          mountApp(node.querySelector('video'))
+          this.mountApp(node.querySelector('video'))
           observer.disconnect()
         }
-      }
-    )
-  )
-)
+      })
+    ))
 
-observer.observe(document.body, {
-  childList: true,
-  subtree: true
-})
+    observer.observe(document.body, { childList: true, subtree: true })
+  }
+
+  mountApp (video) {
+    this.player = video
+
+    setInterval(() => {
+      if (this.isPlaying()) {
+        this.watched++
+        console.log('watched triggered')
+        if (this.isInTheMiddle() && this.watched > 1 && !this.hadBeenStoped) {
+          this.showModal()
+          this.stop()
+          this.hadBeenStoped = true
+        }
+      }
+      //clearInterval(repeater)
+    }, 1000)
+  }
+
+  showModal () {
+    const dialog = document.querySelector('#stop-netflix-overlay')
+
+    dialog.querySelector('button').addEventListener('click', () => {
+      dialog.close()
+      this.play()
+    })
+
+    dialog.showModal()
+  }
+
+  isPlaying () {}
+  isInTheMiddle () {}
+  stop () {}
+  play () {}
+}
 
 /**
  * Start tick each second

@@ -6,7 +6,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         popup: resolve(__dirname, 'popup.html'),
-        app: resolve(__dirname, 'app/app.js'),
+        netflix: resolve(__dirname, 'app/netflix.js'),
       },
       output: {
         assetFileNames: "[name].[ext]",
