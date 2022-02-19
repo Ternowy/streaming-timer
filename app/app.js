@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-import App from 'components/App.vue'
+import App from 'app/components/App.vue'
 import HtmlPlayerPlugin from './services/HtmlPlayerPlugin.js'
 
 export default async (videoQuerySelector = 'video') => {

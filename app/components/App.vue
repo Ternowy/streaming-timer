@@ -3,7 +3,7 @@
 </template>
 
 <script>
-  import TimeoutDialog from 'components/TimeoutDialog.vue'
+  import TimeoutDialog from './TimeoutDialog.vue'
 
   export default {
     name: 'App',

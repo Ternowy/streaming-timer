@@ -6,8 +6,8 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        popup: resolve(__dirname, 'popup.html'),
-        netflix: resolve(__dirname, 'app/netflix.js'),
+        netflix: resolve(__dirname, 'netflix.js'),
+        popup: resolve(__dirname, 'popup.html')
       },
       output: {
         assetFileNames: "[name].[ext]",
@@ -20,7 +20,7 @@ export default defineConfig({
   resolve: {
     alias: {
       'css': resolve(__dirname, 'css'),
-      'components': resolve(__dirname, 'app/components')
+      'app': resolve(__dirname, 'app')
     }
   },
   plugins: [vue()],
