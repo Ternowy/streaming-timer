@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import { resolve } from 'path'
+import vue from '@vitejs/plugin-vue'
 
 export default defineConfig({
   build: {
@@ -11,8 +12,16 @@ export default defineConfig({
       output: {
         assetFileNames: "[name].[ext]",
         entryFileNames: "[name].js",
-        chunkFileNames: "[name].[ext]",
+        chunkFileNames: "[name].js",
+        manualChunks: undefined
       }
     }
-  }
+  },
+  resolve: {
+    alias: {
+      'css': resolve(__dirname, 'css'),
+      'components': resolve(__dirname, 'app/components')
+    }
+  },
+  plugins: [vue()],
 })
