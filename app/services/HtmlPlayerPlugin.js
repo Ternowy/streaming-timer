@@ -1,25 +1,20 @@
 export default class HtmlPlayerPlugin {
   constructor (player) {
     this.player = player
+    this.watched = 0
+    this.startTicking()
   }
 
-  isPlaying () {
-    return !this.player.paused
+  startTicking () {
+    setInterval(() => {
+      if (this.isPlaying()) {
+        this.watched++
+        this.whenPlaying(this.watched)
+      }
+    }, 1000)
   }
 
-  stop () {
-    this.player.pause()
-  }
-
-  play () {
-    this.player.play()
-  }
-
-  isInTheMiddle () {
-    const middle = (this.player.duration / 2)
-    const currentTime = this.player.currentTime
-    return ((currentTime + 5) > middle) && ((currentTime - 5) < middle)
-  }
+  whenPlaying(watched) {}
 
   static getPlayer (selector) {
     return new Promise(resolve => {
@@ -37,4 +32,19 @@ export default class HtmlPlayerPlugin {
     })
   }
 
+  isPlaying () {
+    return !this.player.paused
+  }
+  stop () {
+    this.player.pause()
+  }
+  play () {
+    this.player.play()
+  }
+  isInTheMiddle () {
+    return true
+    const middle = (this.player.duration / 2)
+    const currentTime = this.player.currentTime
+    return ((currentTime + 5) > middle) && ((currentTime - 5) < middle)
+  }
 }

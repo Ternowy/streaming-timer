@@ -7,14 +7,15 @@ export default defineConfig({
     rollupOptions: {
       input: {
         netflix: resolve(__dirname, 'netflix.js'),
+        background: resolve(__dirname, 'background.js'),
         popup: resolve(__dirname, 'popup.html')
       },
       output: {
-        assetFileNames: "[name].[ext]",
-        entryFileNames: "[name].js",
-        chunkFileNames: "[name].js",
+        assetFileNames: '[name].[ext]',
+        entryFileNames: '[name].js',
+        chunkFileNames: '[name].js',
         manualChunks: undefined
-      }
+      },
     }
   },
   resolve: {

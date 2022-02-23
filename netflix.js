@@ -1,3 +1,3 @@
 import mountApp from 'app/app.js'
-import 'css/netflix.css'
+import 'css/netflix.scss'
 mountApp()
